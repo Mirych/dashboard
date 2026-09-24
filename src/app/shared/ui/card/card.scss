@@ -1,0 +1,18 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px;
+  background: var(--tui-background-base-alt);
+  border-radius: 12px;
+}
+
+.card {
+  &__label {
+    color: var(--tui-text-secondary);
+  }
+
+  &__value {
+    font-size: 20px;
+  }
+}

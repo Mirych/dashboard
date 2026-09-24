@@ -1,0 +1,93 @@
+.catalog {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px;
+  background: var(--tui-background-base);
+  border-radius: 16px;
+
+  &-tools {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    tui-textfield {
+      width: 320px;
+    }
+
+    > button {
+      margin-left: auto;
+    }
+  }
+}
+
+.vat-filter {
+  display: flex;
+  gap: 4px;
+}
+
+.statistics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+
+  &-column {
+    width: 1%;
+  }
+}
+
+.delete {
+  &-dialog {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    &__actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+  }
+}
+
+table {
+  width: 100%;
+}
+
+.empty {
+  &-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 32px 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .catalog {
+    padding: 16px;
+
+    &-tools {
+      flex-wrap: wrap;
+
+      tui-textfield {
+        width: 100%;
+      }
+
+      > button {
+        margin-left: 0;
+      }
+    }
+  }
+
+  .statistics {
+    grid-template-columns: 1fr;
+  }
+}

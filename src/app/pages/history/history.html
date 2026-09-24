@@ -1,0 +1,30 @@
+<section class="history">
+  <table tuiTable>
+    <thead>
+    <tr>
+      <th tuiTh>ID</th>
+      <th tuiTh>Товар</th>
+      <th tuiTh>Пользователь</th>
+      <th tuiTh>Сумма</th>
+      <th tuiTh>Дата покупки</th>
+    </tr>
+    </thead>
+
+    <tbody tuiTbody>
+      @for (
+        purchase of purchasesService.purchases();
+        track purchase.id
+        ) {
+        <tr>
+          <td tuiTd>{{ purchase.id }}</td>
+          <td tuiTd>{{ purchase.productName }}</td>
+          <td tuiTd>{{ purchase.username }}</td>
+          <td tuiTd>{{ purchase.amount }} ₽</td>
+          <td tuiTd>
+            {{ purchase.date | date: 'dd.MM.yyyy, HH:mm' }}
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</section>

@@ -1,0 +1,42 @@
+<form
+  class="product-form"
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+>
+  <tui-textfield>
+    <label tuiLabel>Название</label>
+
+    <input
+      tuiInput
+      formControlName="name"
+    />
+  </tui-textfield>
+
+  <tui-textfield>
+    <label tuiLabel>Цена</label>
+
+    <input
+      tuiInputNumber
+      formControlName="price"
+      [min]="0"
+    />
+  </tui-textfield>
+
+  <tui-textfield>
+    <label tuiLabel>НДС</label>
+
+    <input
+      tuiInputNumber
+      formControlName="vat"
+      [min]="0"
+    />
+  </tui-textfield>
+
+  <button
+    tuiButton
+    type="submit"
+    [disabled]="form.invalid"
+  >
+    {{ product() ? 'Сохранить' : 'Добавить' }}
+  </button>
+</form>

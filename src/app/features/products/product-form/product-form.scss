@@ -1,0 +1,10 @@
+.product-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  button {
+    align-self: center;
+    margin-top: 8px;
+  }
+}

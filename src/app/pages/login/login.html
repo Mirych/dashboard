@@ -1,0 +1,40 @@
+<form
+  class="login-form"
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+>
+  <h1>Вход</h1>
+
+  <tui-textfield>
+    <label tuiLabel>Логин</label>
+
+    <input
+      tuiInput
+      formControlName="username"
+      autocomplete="username"
+    />
+  </tui-textfield>
+
+  <tui-textfield>
+    <label tuiLabel>Пароль</label>
+
+    <input
+      tuiInput
+      type="password"
+      formControlName="password"
+      autocomplete="current-password"
+    />
+
+    <tui-icon tuiPassword />
+  </tui-textfield>
+
+  <tui-error [error]="errorPassword" />
+
+  <button
+    tuiButton
+    type="submit"
+    [disabled]="form.invalid"
+  >
+    Войти
+  </button>
+</form>

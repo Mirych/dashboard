@@ -1,0 +1,180 @@
+<section class="catalog">
+  <div class="catalog-tools">
+    <tui-textfield>
+      <label tuiLabel>Поиск по названию</label>
+
+      <input
+        tuiInput
+        [value]="search()"
+        (input)="search.set($any($event.target).value)"
+      />
+    </tui-textfield>
+
+    <div class="vat-filter">
+      <button
+        tuiButton
+        type="button"
+        size="s"
+        [appearance]="vatFilter() === null ? 'primary' : 'secondary'"
+        (click)="vatFilter.set(null)"
+      >
+        Все
+      </button>
+
+      @for (vat of vatOptions(); track vat) {
+        <button
+          tuiButton
+          type="button"
+          size="s"
+          [appearance]="vatFilter() === vat ? 'primary' : 'secondary'"
+          (click)="vatFilter.set(vat)"
+        >
+          {{ vat }}%
+        </button>
+      }
+    </div>
+
+    <button
+      tuiButton
+      type="button"
+      (click)="openProductDialog()"
+    >
+      Добавить товар
+    </button>
+  </div>
+
+  <div class="statistics">
+    <app-card
+      label="Товаров"
+      [value]="statistics().count"
+    />
+
+    <app-card
+      label="Средняя цена"
+      [value]="statistics().averagePrice.toFixed(0) + ' ₽'"
+    />
+
+    <app-card
+      label="Общая стоимость"
+      [value]="statistics().totalPrice + ' ₽'"
+    />
+  </div>
+
+  <table tuiTable>
+    <thead>
+    <tr>
+      <th tuiTh>ID</th>
+      <th tuiTh>Название</th>
+      <th tuiTh>Цена</th>
+      <th tuiTh>НДС</th>
+      <th tuiTh class="actions-column">Действия</th>
+    </tr>
+    </thead>
+
+    <tbody tuiTbody>
+      @for (product of filteredProducts(); track product.id) {
+        <tr>
+          <td tuiTd>{{ product.id }}</td>
+          <td tuiTd>{{ product.name }}</td>
+          <td tuiTd>{{ product.price }} ₽</td>
+          <td tuiTd>{{ product.vat }}%</td>
+
+          <td tuiTd>
+            <div class="actions">
+              <button
+                tuiIconButton
+                type="button"
+                appearance="flat"
+                iconStart="@tui.pencil"
+                aria-label="Изменить товар"
+                (click)="openProductDialog(product)"
+              ></button>
+
+              <button
+                tuiIconButton
+                type="button"
+                appearance="flat-destructive"
+                iconStart="@tui.trash"
+                aria-label="Удалить товар"
+                (click)="openDeleteDialog(product)"
+              ></button>
+            </div>
+          </td>
+        </tr>
+      } @empty {
+        <tr>
+          <td tuiTd colspan="5">
+            @if (!productsService.products().length) {
+              <div class="empty-state">
+                <span>Товаров пока нет</span>
+
+                <button
+                  tuiButton
+                  type="button"
+                  size="s"
+                  (click)="openProductDialog()"
+                >
+                  Добавить товар
+                </button>
+              </div>
+            } @else {
+              <div class="empty-state">
+                <span>По вашему запросу ничего не найдено</span>
+              </div>
+            }
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+  <ng-template
+    [(tuiDialog)]="isAddDialogOpen"
+    [tuiDialogOptions]="{
+    label: editingProduct ? 'Редактирование товара' : 'Добавление товара',
+    size: 's'
+  }"
+  >
+    <app-product-form
+      [product]="editingProduct"
+      (save)="saveProduct($event)"
+    />
+  </ng-template>
+
+  <ng-template
+    [(tuiDialog)]="isDeleteDialogOpen"
+    [tuiDialogOptions]="{
+    label: 'Удаление товара',
+    size: 's'
+  }"
+  >
+    @if (deletingProduct) {
+      <div class="delete-dialog">
+        <p>
+          Вы действительно хотите удалить
+          <strong>{{ deletingProduct.name }}</strong>?
+        </p>
+
+        <div class="delete-dialog__actions">
+          <button
+            tuiButton
+            type="button"
+            appearance="secondary"
+            (click)="isDeleteDialogOpen = false"
+          >
+            Отмена
+          </button>
+
+          <button
+            tuiButton
+            type="button"
+            appearance="negative"
+            (click)="deleteProduct()"
+          >
+            Удалить
+          </button>
+        </div>
+      </div>
+    }
+  </ng-template>
+</section>

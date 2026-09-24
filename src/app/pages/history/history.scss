@@ -1,0 +1,15 @@
+.history {
+  padding: 24px;
+  background: var(--tui-background-base);
+  border-radius: 16px;
+
+  table {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .history {
+    padding: 16px;
+  }
+}

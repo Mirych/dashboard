@@ -1,0 +1,38 @@
+<tui-app-bar
+  class="app-bar"
+  tuiAppBarSize
+>
+  <div class="app-bar__content">
+    <strong>Dashboard</strong>
+
+    <button
+      tuiButton
+      type="button"
+      appearance="flat"
+      size="s"
+      (click)="logout()"
+    >
+      Выйти
+    </button>
+  </div>
+</tui-app-bar>
+
+<div class="tabs-container">
+  <tui-tabs class="tabs">
+    <a
+      tuiTab
+      routerLink="/dashboard"
+      routerLinkActive="active"
+    >
+      Каталог товаров
+    </a>
+
+    <a
+      tuiTab
+      routerLink="/history"
+      routerLinkActive="active"
+    >
+      История покупок
+    </a>
+  </tui-tabs>
+</div>

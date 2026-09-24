@@ -1,0 +1,47 @@
+:host {
+  display: block;
+  background: var(--tui-background-base);
+  border-bottom: 1px solid var(--tui-border-normal);
+}
+
+.app {
+  &-bar {
+    &__content {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      box-sizing: border-box;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+}
+
+.tabs {
+  &-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 600px) {
+  .app {
+    &-bar {
+      &__content {
+        padding: 0 16px;
+      }
+    }
+  }
+
+  .tabs {
+    &-container {
+      padding: 0 16px;
+    }
+  }
+}
